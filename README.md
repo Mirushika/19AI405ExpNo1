@@ -47,59 +47,56 @@
 
 # Medicine Prescribing AI Agent using PEAS Description
 
-class MedicineAgent:
-    def __init__(self, location, rooms):
-        self.location = location
-        self.rooms = rooms
-        self.performance = 0
-
-    def sense_temperature(self):
-        return self.rooms[self.location]
-
-    def treat_patient(self):
-        if self.sense_temperature() > 98.5:
-            print("Patient has fever in", self.location)
-            print("Prescribing Medicine...")
-            self.rooms[self.location] = 98.0
-            self.performance += 10
+import random
+class HealthMonitoringAgent:
+    def __init__(self, patient_data):
+        self.patient_data = patient_data
+    def monitor_health(self):
+        while True:
+            current_health_state = self.sensors.get_health_state()
+            action = self.choose_action(current_health_state)
+            self.actuators.perform_action(action)
+            if action == "No specific action needed":
+                break
+    def choose_action(self, current_health_state):
+        if current_health_state['heart_rate'] > 120:
+            return "Alert healthcare provider: High heart rate detected"
+        elif current_health_state['blood_pressure'] > 140:
+            return "Alert healthcare provider: High blood pressure detected"
+        elif current_health_state['temperature'] > 38:
+            return "Recommend rest and monitor temperature"
         else:
-            print("Patient is Healthy in", self.location)
-
-    def move(self):
-        if self.location == "Room A":
-            self.location = "Room B"
-        else:
-            self.location = "Room A"
-        print("Moving to", self.location)
-        self.performance -= 1
-
-    def run(self, steps):
-        for i in range(steps):
-            print("\nStep:", i+1)
-            print("Current Location:", self.location)
-            print("Temperature:", self.rooms[self.location])
-            self.treat_patient()
-            self.move()
-
-        print("\nFinal Room Status:", self.rooms)
-        print("Performance Score:", self.performance)
-
-
-rooms = {
-    "Room A": 99.0,
-    "Room B": 97.0
-}
-
-agent = MedicineAgent("Room A", rooms)
-agent.run(5)
-
+            return "No specific action needed"
+class HealthSensors:
+    def get_health_state(self):
+        return {
+            'heart_rate': random.randint(60, 150),
+            'blood_pressure': random.randint(90, 160),
+            'temperature': random.uniform(36.0, 38.5)
+        }
+class HealthActuators:
+    def perform_action(self, action):
+        print(action)
+if __name__ == "__main__":
+    patient_data = {
+        'patient_id': 123,
+        'name': 'John Doe',
+        'age': 35
+    }
+    health_sensors = HealthSensors()
+    health_actuators = HealthActuators()
+    health_monitoring_agent = HealthMonitoringAgent(patient_data)
+    health_monitoring_agent.sensors = health_sensors
+    health_monitoring_agent.actuators = health_actuators
+    health_monitoring_agent.monitor_health()
 
 </code>
 </pre>
 
 <h3>OUTPUT:</h3>
-<img width="706" height="712" alt="image" src="https://github.com/user-attachments/assets/c839b02e-3748-45ae-8f59-f03a77fd8577" />
-<img width="706" height="305" alt="image" src="https://github.com/user-attachments/assets/f21fb4b7-62a0-4249-b780-0dc770f48b5b" />
+
+<img width="735" height="195" alt="Screenshot 2026-07-25 114709" src="https://github.com/user-attachments/assets/42059dac-886a-4e88-b8d3-5cc309f86190" />
+
 
 <h3>RESULT</h3>
 <p>Thus the Developing AI Agent with PEAS Description was implemented using python programming.</p>
