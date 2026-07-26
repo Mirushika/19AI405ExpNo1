@@ -46,7 +46,7 @@
 <code>
 
 # Medicine Prescribing AI Agent using PEAS Description
-
+```
 import random
 class HealthMonitoringAgent:
     def __init__(self, patient_data):
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     health_monitoring_agent.sensors = health_sensors
     health_monitoring_agent.actuators = health_actuators
     health_monitoring_agent.monitor_health()
-
+```
 </code>
 </pre>
 
